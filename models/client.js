@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const jobSchema = require("./job");
 
 const clientSchema = mongoose.Schema({
   name: {
@@ -9,7 +10,7 @@ const clientSchema = mongoose.Schema({
   image: {
     type: String,
     trim: true,
-    default: ""
+    default: "",
   },
   email: {
     type: String,
@@ -36,10 +37,22 @@ const clientSchema = mongoose.Schema({
       message: "Please enter a long password",
     },
   },
-  //   address: {
-  //     type: String,
-  //     default: "",
-  //   },
+  jobs: [{
+    job: {
+      type: jobSchema, // reference the jobSchema
+      required: true,
+    },
+    created_on: {
+      type: Date,
+      required: true,
+      default: Date.now,
+    },
+    updated_on: {
+      type: Date,
+      required: true,
+      default: Date.now,
+    },
+  }],
 });
 
 const Client = mongoose.model("Client", clientSchema);

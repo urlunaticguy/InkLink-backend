@@ -17,7 +17,7 @@ freelancerRouter.post("/api/v1/freelancer/signup", async (req, res) => {
   if (existingFreelancer) {
     return res
       .status(400) 
-      .json({ msg: "Freelancer with same email already exists!" });
+      .json({status:400, message: "Freelancer with same email already exists!" });
       //this will return the status code as 400 and the message
   }
   //200 - OK
@@ -35,9 +35,16 @@ freelancerRouter.post("/api/v1/freelancer/signup", async (req, res) => {
   freelancer = await freelancer.save();
 
   //return that data to the user
-  res.json(freelancer); // by default status code is 200
+  res.json({
+    status: 200,
+    message: "success",
+    data:freelancer,
+}); // by default status code is 200
   }catch (e) {
-    res.status(500).json({error: e.message});
+    res.status(500).json({
+        status: 500,
+        message: e.message,
+    });
   }
 });
 
@@ -50,21 +57,28 @@ freelancerRouter.post('/api/v1/freelancer/signin', async (req, res) => {
         const freelancer = await Freelancer.findOne({ email });
 
         if (!freelancer) {
-            return res.status(400).json({msg: 'Freelancer with this email does not exist'});
+            return res.status(400).json({status:400, message: 'Freelancer with this email does not exist'});
         }
         if (!bcryptjs.compareSync(password, freelancer.password)) {
 
-            return res.status(400).json({msg: 'Incorrect password'});
+            return res.status(400).json({status:400, message: 'Incorrect password'});
         }
 
         const token = jwt.sign({id: freelancer._id}, "passwordKey");
 
         res.json({
             token,
-            ...freelancer._doc
+            status: 200,
+            message: "success",
+            data: {
+              ...freelancer._doc,
+            },
         });
     }catch (e) {
-        res.status(500).json({error: e.message});
+        res.status(500).json({
+            status: 500,
+            message: e.message,
+        });
     }
 });
 
