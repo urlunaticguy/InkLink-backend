@@ -17,7 +17,7 @@ agencyRouter.post("/api/v1/agency/signup", async (req, res) => {
   if (existingAgency) {
     return res
       .status(400) //Bad request ==> client error status code
-      .json({ msg: "Agency with same email already exists!" });
+      .json({ status:400, message: "Agency with same email already exists!" });
       //this will return the status code as 400 and the message
   }
   //200 - OK
@@ -33,9 +33,16 @@ agencyRouter.post("/api/v1/agency/signup", async (req, res) => {
 
   agency = await agency.save();
 
-  res.json(agency); 
+  res.json({
+    status: 200,
+    message: "success",
+    data: agency
+  }); 
   }catch (e) {
-    res.status(500).json({error: e.message});
+    res.status(500).json({
+        status: 500,
+        message: e.message,
+    });
   }
 });
 
@@ -47,21 +54,26 @@ agencyRouter.post('/api/v1/agency/signin', async (req, res) => {
         const agency = await Agency.findOne({ email });
 
         if (!agency) {
-            return res.status(400).json({msg: 'Agency with this email does not exist'});
+            return res.status(400).json({status:400, message: 'Agency with this email does not exist'});
         }
         if (!bcryptjs.compareSync(password, agency.password)) {
 
-            return res.status(400).json({msg: 'Incorrect password'});
+            return res.status(400).json({status:400, message:'Incorrect password'});
         }
 
         const token = jwt.sign({id: agency._id}, "passwordKey");
 
         res.json({
             token,
-            ...agency._doc
+            status: 200,
+            message: "success",
+            data:{ ...agency._doc}
         });
     }catch (e) {
-        res.status(500).json({error: e.message});
+        res.status(500).json({
+            status: 500,
+            message: e.message,
+        });
     }
 });
 
