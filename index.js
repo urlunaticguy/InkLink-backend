@@ -6,7 +6,7 @@ const agencyRouter = require('./routes/agencyAuth');
 const jobRouter = require('./routes/jobs');
 const cors = require('cors');
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 const app = express();
 app.use(express.json());
