@@ -6,6 +6,12 @@
         "use": "@vercel/node"
       }
     ],
+    "routes": [
+      {
+        "src": "/(.*)",
+        "dest": "/"
+      }
+    ],
     "headers": [
         {
           "source": "/(.*)",
@@ -14,15 +20,10 @@
           ]
         },
         {
-          "source": "ink-link-alpha.vercel.app/(.*)",
+          "source": "/ink-link-alpha.vercel.app/(.*)",
           "headers": [
             { "key": "Access-Control-Allow-Origin", "value": "*" }
           ]
         }  
     ]
 }
-
-
-
-
-    
