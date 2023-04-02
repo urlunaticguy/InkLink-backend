@@ -18,12 +18,6 @@
           "headers": [
             { "key": "Access-Control-Allow-Origin", "value": "*" }
           ]
-        },
-        {
-          "source": "/ink-link-alpha.vercel.app/(.*)",
-          "headers": [
-            { "key": "Access-Control-Allow-Origin", "value": "*" }
-          ]
-        }  
+        }
     ]
 }
