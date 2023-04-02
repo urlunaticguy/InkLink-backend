@@ -14,7 +14,7 @@
           ]
         },
         {
-          "source": "/vercel_app_domain_name/(.*)",
+          "source": "ink-link-alpha.vercel.app/(.*)",
           "headers": [
             { "key": "Access-Control-Allow-Origin", "value": "*" }
           ]
