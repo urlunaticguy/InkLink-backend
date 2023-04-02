@@ -42,6 +42,10 @@ const clientSchema = mongoose.Schema({
       type: jobSchema, // reference the jobSchema
       required: true,
     },
+    applicants:{
+      type: [String],
+      default: []
+    },
     created_on: {
       type: Date,
       required: true,
@@ -53,6 +57,14 @@ const clientSchema = mongoose.Schema({
       default: Date.now,
     },
   }],
+  tags: {
+    type: [String],
+    trim: true,
+  },
+  bookmarks: {
+    type: [String],
+    trim: true,
+  }
 });
 
 const Client = mongoose.model("Client", clientSchema);

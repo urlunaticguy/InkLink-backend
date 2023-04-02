@@ -36,6 +36,18 @@ const agencySchema = mongoose.Schema({
       message: "Please enter a long password",
     },
   },
+  tags: {
+    type: [String],
+    trim: true,
+  },
+  freelancer_bookmarks: {
+    type: [String],
+    trim: true,
+  },
+  client_bookmarks: {
+    type: [String],
+    trim: true,
+  }
 });
 
 const Agency = mongoose.model("Agency", agencySchema);

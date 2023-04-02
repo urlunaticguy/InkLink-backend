@@ -4,6 +4,7 @@ const clientRouter = require('./routes/clientAuth');
 const freelancerRouter = require('./routes/freelancerAuth');
 const agencyRouter = require('./routes/agencyAuth');
 const jobRouter = require('./routes/jobs');
+const cors = require('cors');
 
 const PORT = 3000;
 
@@ -13,6 +14,7 @@ app.use(clientRouter);
 app.use(freelancerRouter);
 app.use(agencyRouter);
 app.use(jobRouter);
+app.use(cors());
 
 
 const DB = "mongodb+srv://bharatahuja:skillvalley@cluster0.atz7e6q.mongodb.net/?retryWrites=true&w=majority";
